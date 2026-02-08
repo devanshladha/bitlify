@@ -1,0 +1,57 @@
+
+version: '3.8'
+
+services:
+  # 1. The FastAPI Backend
+  backend:
+    build: .
+    volumes:
+      - .:/app 
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+      - mongo
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=YOURPASSWORD
+      - DB_NAME=bitlify_db
+      - DB_HOST=db
+      - DB_PORT=5432
+      - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY=supersecret
+      - MONGODB_URL=mongodb://mongo:27017
+
+  # 2. The PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=YOURPASSWORD
+      - POSTGRES_DB=bitlify_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  
+  # 3. The Redis Cache
+  redis:
+    image: redis:alpine
+    restart: always
+    ports: 
+      - "6379:6379"
+  
+  # 4. The MongoDB
+  mongo:
+    image: mongo:6.0
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  postgres_data:
+  mongo_data:
