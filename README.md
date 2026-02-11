@@ -133,6 +133,7 @@ The API will be available at `http://localhost:8000`.
 - `GET /auth/callback` - OAuth callback handler.
 
 ## 📂 Project Structure
+```
 bitlify/
 ├── backend/
 │   ├── app/
@@ -148,7 +149,7 @@ bitlify/
 │   ├── docker-compose.yml
 │   └── requirements.txt
 └── todo.txt
-
+```
 ## 🤝 Contributing
 Contributions are welcome! Please open an issue or submit a pull request for any bugs or feature enhancements.
 
