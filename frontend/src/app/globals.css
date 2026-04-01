@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: #3b82f6;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-monr: var(--font-manrope)
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glow-button {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+  transition: box-shadow 0.3s ease;
+}
+
+.glow-button:hover {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+}
+
+.active-nav {
+  background-color: rgba(37, 123, 244, 0.1);
+  color: #257bf4;
+}
+
+@layer utilities {
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300;
+  }
+
+  .modal-overlay-open {
+    @apply opacity-100;
+  }
+
+  .modal-overlay-close {
+    @apply opacity-0;
+  }
+
+  .modal-content {
+    @apply relative w-full max-w-md mx-4 transform transition-all duration-300;
+  }
+
+  .modal-open {
+    @apply opacity-100 scale-100 translate-y-0;
+  }
+
+  .modal-close {
+    @apply opacity-0 scale-95 translate-y-4;
+  }
+}
